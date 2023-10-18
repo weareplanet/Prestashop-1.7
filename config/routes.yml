@@ -1,0 +1,14 @@
+download_packing_slip:
+  path: weArePlanet/{orderId}/packingslip
+  methods: [GET]
+  defaults:
+    _controller: PrestaShop\Module\WeArePlanet\Controller\Admin\processWeArePlanetPackingSlip::processWeArePlanetPackingSlip
+  requirements:
+      orderId: \d+
+download_invoice:
+  path: weArePlanet/{orderId}/invoice
+  methods: [GET]
+  defaults:
+    _controller: PrestaShop\Module\WeArePlanet\Controller\Admin\processWeArePlanetInvoice::processWeArePlanetInvoice
+  requirements:
+      orderId: \d+
