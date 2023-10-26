@@ -33,16 +33,16 @@ Your prompt attention to these instructions is greatly appreciated. If you have 
 
 ## Documentation
 
-* [English](https://plugin-documentation.weareplanet.com/weareplanet/prestashop-1.7/1.2.39/docs/en/documentation.html)
+* [Documentation](https://plugin-documentation.weareplanet.com/weareplanet/prestashop-1.7/1.2.39/docs/en/documentation.html)
 
 ## Support
 
-Support queries can be issued on the [WeArePlanet support site](https://paymentshub.weareplanet.com/space/select?target=/support).
+For support queries please contact [WeArePlanet support](mailto:support@datatrans.ch?subject=Support%20on%20Prestashop%201.7%20-%20Topic%3A).
 
 ## License
 
 Please see the [license file](https://github.com/weareplanet/prestashop-1.7/blob/1.2.39/LICENSE) for more information.
 
-## Other PrestaShop Versions
+## PrestaShop Version 8
 
-Find the module for different PrestaShop versions [here](../../../prestashop).
+Find the module for PrestaShop version 8 [here](https://github.com/weareplanet/prestashop-8).
