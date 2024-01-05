@@ -86,7 +86,8 @@ class ChargeAttemptService {
 	 * Operation countWithHttpInfo
 	 *
 	 * Count
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \WeArePlanet\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \WeArePlanet\Sdk\ApiException
@@ -135,7 +136,6 @@ class ChargeAttemptService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
@@ -144,7 +144,7 @@ class ChargeAttemptService {
 				$headerParams,
 				'int',
 				'/charge-attempt/count'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), 'int', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
@@ -197,7 +197,8 @@ class ChargeAttemptService {
 	 * Operation readWithHttpInfo
 	 *
 	 * Read
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the charge attempt which should be returned. (required)
 	 * @throws \WeArePlanet\Sdk\ApiException
@@ -248,7 +249,6 @@ class ChargeAttemptService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
@@ -257,7 +257,7 @@ class ChargeAttemptService {
 				$headerParams,
 				'\WeArePlanet\Sdk\Model\ChargeAttempt',
 				'/charge-attempt/read'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\WeArePlanet\Sdk\Model\ChargeAttempt', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
@@ -310,7 +310,8 @@ class ChargeAttemptService {
 	 * Operation searchWithHttpInfo
 	 *
 	 * Search
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \WeArePlanet\Sdk\Model\EntityQuery $query The query restricts the charge attempts which are returned by the search. (required)
 	 * @throws \WeArePlanet\Sdk\ApiException
@@ -363,7 +364,6 @@ class ChargeAttemptService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
@@ -372,7 +372,7 @@ class ChargeAttemptService {
 				$headerParams,
 				'\WeArePlanet\Sdk\Model\ChargeAttempt[]',
 				'/charge-attempt/search'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\WeArePlanet\Sdk\Model\ChargeAttempt[]', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {

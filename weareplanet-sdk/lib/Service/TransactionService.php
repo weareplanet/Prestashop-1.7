@@ -86,7 +86,8 @@ class TransactionService {
 	 * Operation confirmWithHttpInfo
 	 *
 	 * Confirm
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \WeArePlanet\Sdk\Model\TransactionPending $transaction_model The transaction JSON object to update and confirm. (required)
 	 * @throws \WeArePlanet\Sdk\ApiException
@@ -139,7 +140,6 @@ class TransactionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
@@ -148,7 +148,7 @@ class TransactionService {
 				$headerParams,
 				'\WeArePlanet\Sdk\Model\Transaction',
 				'/transaction/confirm'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\WeArePlanet\Sdk\Model\Transaction', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
@@ -209,7 +209,8 @@ class TransactionService {
 	 * Operation countWithHttpInfo
 	 *
 	 * Count
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \WeArePlanet\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \WeArePlanet\Sdk\ApiException
@@ -258,7 +259,6 @@ class TransactionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
@@ -267,7 +267,7 @@ class TransactionService {
 				$headerParams,
 				'int',
 				'/transaction/count'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), 'int', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
@@ -320,7 +320,8 @@ class TransactionService {
 	 * Operation createWithHttpInfo
 	 *
 	 * Create
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \WeArePlanet\Sdk\Model\TransactionCreate $transaction The transaction object which should be created. (required)
 	 * @throws \WeArePlanet\Sdk\ApiException
@@ -373,7 +374,6 @@ class TransactionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
@@ -382,7 +382,7 @@ class TransactionService {
 				$headerParams,
 				'\WeArePlanet\Sdk\Model\Transaction',
 				'/transaction/create'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\WeArePlanet\Sdk\Model\Transaction', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
@@ -435,7 +435,8 @@ class TransactionService {
 	 * Operation createTransactionCredentialsWithHttpInfo
 	 *
 	 * Create Transaction Credentials
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the transaction which should be returned. (required)
 	 * @throws \WeArePlanet\Sdk\ApiException
@@ -486,7 +487,6 @@ class TransactionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
@@ -495,7 +495,7 @@ class TransactionService {
 				$headerParams,
 				'string',
 				'/transaction/createTransactionCredentials'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), 'string', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
@@ -548,7 +548,8 @@ class TransactionService {
 	 * Operation deleteOneClickTokenWithCredentialsWithHttpInfo
 	 *
 	 * Delete One-Click Token with Credentials
-	 *
+     
+     *
 	 * @param string $credentials The credentials identifies the transaction and contains the security details which grants the access this operation. (required)
 	 * @param int $token_id The token ID will be used to find the token which should be removed. (required)
 	 * @throws \WeArePlanet\Sdk\ApiException
@@ -599,7 +600,6 @@ class TransactionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
@@ -608,7 +608,7 @@ class TransactionService {
 				$headerParams,
 				null,
 				'/transaction/deleteOneClickTokenWithCredentials'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders());
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
@@ -653,7 +653,8 @@ class TransactionService {
 	 * Operation exportWithHttpInfo
 	 *
 	 * Export
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \WeArePlanet\Sdk\Model\EntityExportRequest $request The request controls the entries which are exported. (required)
 	 * @throws \WeArePlanet\Sdk\ApiException
@@ -706,7 +707,6 @@ class TransactionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
@@ -715,7 +715,7 @@ class TransactionService {
 				$headerParams,
 				'string',
 				'/transaction/export'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), 'string', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
@@ -767,7 +767,8 @@ class TransactionService {
 	 * Operation fetchOneClickTokensWithCredentialsWithHttpInfo
 	 *
 	 * Fetch One Click Tokens with Credentials
-	 *
+     
+     *
 	 * @param string $credentials The credentials identifies the transaction and contains the security details which grants the access this operation. (required)
 	 * @throws \WeArePlanet\Sdk\ApiException
 	 * @throws \WeArePlanet\Sdk\VersioningException
@@ -810,7 +811,6 @@ class TransactionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
@@ -819,7 +819,7 @@ class TransactionService {
 				$headerParams,
 				'\WeArePlanet\Sdk\Model\TokenVersion[]',
 				'/transaction/fetchOneClickTokensWithCredentials'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\WeArePlanet\Sdk\Model\TokenVersion[]', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
@@ -873,7 +873,8 @@ class TransactionService {
 	 * Operation fetchPaymentMethodsWithHttpInfo
 	 *
 	 * Fetch Possible Payment Methods
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the transaction which should be returned. (required)
 	 * @param string $integration_mode The integration mode defines the type of integration that is applied on the transaction. (required)
@@ -932,7 +933,6 @@ class TransactionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
@@ -941,7 +941,7 @@ class TransactionService {
 				$headerParams,
 				'\WeArePlanet\Sdk\Model\PaymentMethodConfiguration[]',
 				'/transaction/fetch-payment-methods'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\WeArePlanet\Sdk\Model\PaymentMethodConfiguration[]', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
@@ -994,7 +994,8 @@ class TransactionService {
 	 * Operation fetchPaymentMethodsWithCredentialsWithHttpInfo
 	 *
 	 * Fetch Possible Payment Methods with Credentials
-	 *
+     
+     *
 	 * @param string $credentials The credentials identifies the transaction and contains the security details which grants the access this operation. (required)
 	 * @param string $integration_mode The integration mode defines the type of integration that is applied on the transaction. (required)
 	 * @throws \WeArePlanet\Sdk\ApiException
@@ -1045,7 +1046,6 @@ class TransactionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
@@ -1054,7 +1054,7 @@ class TransactionService {
 				$headerParams,
 				'\WeArePlanet\Sdk\Model\PaymentMethodConfiguration[]',
 				'/transaction/fetch-payment-methods-with-credentials'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\WeArePlanet\Sdk\Model\PaymentMethodConfiguration[]', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
@@ -1107,7 +1107,8 @@ class TransactionService {
 	 * Operation getInvoiceDocumentWithHttpInfo
 	 *
 	 * getInvoiceDocument
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the transaction to get the invoice document for. (required)
 	 * @throws \WeArePlanet\Sdk\ApiException
@@ -1158,7 +1159,6 @@ class TransactionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
@@ -1167,7 +1167,7 @@ class TransactionService {
 				$headerParams,
 				'\WeArePlanet\Sdk\Model\RenderedDocument',
 				'/transaction/getInvoiceDocument'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\WeArePlanet\Sdk\Model\RenderedDocument', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
@@ -1220,7 +1220,8 @@ class TransactionService {
 	 * Operation getLatestTransactionLineItemVersionWithHttpInfo
 	 *
 	 * getLatestSuccessfulTransactionLineItemVersion
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the transaction to get the latest line item version for. (required)
 	 * @throws \WeArePlanet\Sdk\ApiException
@@ -1271,7 +1272,6 @@ class TransactionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
@@ -1280,7 +1280,7 @@ class TransactionService {
 				$headerParams,
 				'\WeArePlanet\Sdk\Model\TransactionLineItemVersion',
 				'/transaction/getLatestTransactionLineItemVersion'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\WeArePlanet\Sdk\Model\TransactionLineItemVersion', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
@@ -1333,7 +1333,8 @@ class TransactionService {
 	 * Operation getPackingSlipWithHttpInfo
 	 *
 	 * getPackingSlip
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the transaction to get the packing slip for. (required)
 	 * @throws \WeArePlanet\Sdk\ApiException
@@ -1384,7 +1385,6 @@ class TransactionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
@@ -1393,7 +1393,7 @@ class TransactionService {
 				$headerParams,
 				'\WeArePlanet\Sdk\Model\RenderedDocument',
 				'/transaction/getPackingSlip'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\WeArePlanet\Sdk\Model\RenderedDocument', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
@@ -1446,7 +1446,8 @@ class TransactionService {
 	 * Operation processOneClickTokenAndRedirectWithCredentialsWithHttpInfo
 	 *
 	 * Process One-Click Token with Credentials
-	 *
+     
+     *
 	 * @param string $credentials The credentials identifies the transaction and contains the security details which grants the access this operation. (required)
 	 * @param int $token_id The token ID is used to load the corresponding token and to process the transaction with it. (required)
 	 * @throws \WeArePlanet\Sdk\ApiException
@@ -1497,7 +1498,6 @@ class TransactionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
@@ -1506,7 +1506,7 @@ class TransactionService {
 				$headerParams,
 				'string',
 				'/transaction/processOneClickTokenAndRedirectWithCredentials'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), 'string', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
@@ -1559,7 +1559,8 @@ class TransactionService {
 	 * Operation processWithoutUserInteractionWithHttpInfo
 	 *
 	 * Process Without User Interaction
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the transaction which should be processed. (required)
 	 * @throws \WeArePlanet\Sdk\ApiException
@@ -1610,7 +1611,6 @@ class TransactionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
@@ -1619,7 +1619,7 @@ class TransactionService {
 				$headerParams,
 				'\WeArePlanet\Sdk\Model\Transaction',
 				'/transaction/processWithoutUserInteraction'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\WeArePlanet\Sdk\Model\Transaction', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
@@ -1672,7 +1672,8 @@ class TransactionService {
 	 * Operation readWithHttpInfo
 	 *
 	 * Read
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the transaction which should be returned. (required)
 	 * @throws \WeArePlanet\Sdk\ApiException
@@ -1723,7 +1724,6 @@ class TransactionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
@@ -1732,7 +1732,7 @@ class TransactionService {
 				$headerParams,
 				'\WeArePlanet\Sdk\Model\Transaction',
 				'/transaction/read'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\WeArePlanet\Sdk\Model\Transaction', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
@@ -1784,7 +1784,8 @@ class TransactionService {
 	 * Operation readWithCredentialsWithHttpInfo
 	 *
 	 * Read With Credentials
-	 *
+     
+     *
 	 * @param string $credentials The credentials identifies the transaction and contains the security details which grants the access this operation. (required)
 	 * @throws \WeArePlanet\Sdk\ApiException
 	 * @throws \WeArePlanet\Sdk\VersioningException
@@ -1827,7 +1828,6 @@ class TransactionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
@@ -1836,7 +1836,7 @@ class TransactionService {
 				$headerParams,
 				'\WeArePlanet\Sdk\Model\Transaction',
 				'/transaction/readWithCredentials'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\WeArePlanet\Sdk\Model\Transaction', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
@@ -1889,7 +1889,8 @@ class TransactionService {
 	 * Operation searchWithHttpInfo
 	 *
 	 * Search
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \WeArePlanet\Sdk\Model\EntityQuery $query The query restricts the transactions which are returned by the search. (required)
 	 * @throws \WeArePlanet\Sdk\ApiException
@@ -1942,7 +1943,6 @@ class TransactionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
@@ -1951,7 +1951,7 @@ class TransactionService {
 				$headerParams,
 				'\WeArePlanet\Sdk\Model\Transaction[]',
 				'/transaction/search'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\WeArePlanet\Sdk\Model\Transaction[]', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
@@ -2004,7 +2004,8 @@ class TransactionService {
 	 * Operation updateWithHttpInfo
 	 *
 	 * Update
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \WeArePlanet\Sdk\Model\TransactionPending $entity The transaction object with the properties which should be updated. (required)
 	 * @throws \WeArePlanet\Sdk\ApiException
@@ -2057,7 +2058,6 @@ class TransactionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
@@ -2066,7 +2066,7 @@ class TransactionService {
 				$headerParams,
 				'\WeArePlanet\Sdk\Model\Transaction',
 				'/transaction/update'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\WeArePlanet\Sdk\Model\Transaction', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {

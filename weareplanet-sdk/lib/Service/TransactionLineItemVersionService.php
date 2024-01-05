@@ -86,7 +86,8 @@ class TransactionLineItemVersionService {
 	 * Operation countWithHttpInfo
 	 *
 	 * Count
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \WeArePlanet\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \WeArePlanet\Sdk\ApiException
@@ -135,7 +136,6 @@ class TransactionLineItemVersionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
@@ -144,7 +144,7 @@ class TransactionLineItemVersionService {
 				$headerParams,
 				'int',
 				'/transaction-line-item-version/count'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), 'int', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
@@ -197,7 +197,8 @@ class TransactionLineItemVersionService {
 	 * Operation createWithHttpInfo
 	 *
 	 * create
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \WeArePlanet\Sdk\Model\TransactionLineItemVersionCreate $line_item_version The line item version object which should be created. (required)
 	 * @throws \WeArePlanet\Sdk\ApiException
@@ -250,7 +251,6 @@ class TransactionLineItemVersionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
@@ -259,7 +259,7 @@ class TransactionLineItemVersionService {
 				$headerParams,
 				'\WeArePlanet\Sdk\Model\TransactionLineItemVersion',
 				'/transaction-line-item-version/create'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\WeArePlanet\Sdk\Model\TransactionLineItemVersion', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
@@ -312,7 +312,8 @@ class TransactionLineItemVersionService {
 	 * Operation readWithHttpInfo
 	 *
 	 * Read
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The ID of the line item version which should be returned. (required)
 	 * @throws \WeArePlanet\Sdk\ApiException
@@ -363,7 +364,6 @@ class TransactionLineItemVersionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
@@ -372,7 +372,7 @@ class TransactionLineItemVersionService {
 				$headerParams,
 				'\WeArePlanet\Sdk\Model\TransactionLineItemVersion',
 				'/transaction-line-item-version/read'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\WeArePlanet\Sdk\Model\TransactionLineItemVersion', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
@@ -425,7 +425,8 @@ class TransactionLineItemVersionService {
 	 * Operation searchWithHttpInfo
 	 *
 	 * Search
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \WeArePlanet\Sdk\Model\EntityQuery $query The query restricts line item versions which are returned by the search. (required)
 	 * @throws \WeArePlanet\Sdk\ApiException
@@ -478,7 +479,6 @@ class TransactionLineItemVersionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
@@ -487,7 +487,7 @@ class TransactionLineItemVersionService {
 				$headerParams,
 				'\WeArePlanet\Sdk\Model\TransactionLineItemVersion[]',
 				'/transaction-line-item-version/search'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\WeArePlanet\Sdk\Model\TransactionLineItemVersion[]', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {

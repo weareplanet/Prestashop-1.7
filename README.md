@@ -5,7 +5,7 @@
 # PrestaShop 1.7 WeArePlanet Integration
 This repository contains the PrestaShop WeArePlanet payment module that enables the shop to process payments with [WeArePlanet](https://www.weareplanet.com/).
 
-## To install module manually by dragging up zip file, please download [.zip archive](https://plugin-documentation.weareplanet.com/weareplanet/prestashop-1.7/1.2.39/weareplanet.zip) of module with correct structure required by Prestashop installation.
+## To install module manually by dragging up zip file, please download [.zip archive](https://plugin-documentation.weareplanet.com/weareplanet/prestashop-1.7/1.2.40/weareplanet.zip) of module with correct structure required by Prestashop installation.
 
 ## Important Notice for Existing Merchants
 
@@ -15,7 +15,8 @@ Effective from version 1.2.36 of our plugin, we have made important changes to e
 
 ### 1. Uninstall the Mailhook Plugin
 
-If you are an existing merchant using our Prestashop plugin, it is crucial that you uninstall the [Mailhook](https://github.com/wallee-payment/prestashop-mailhook) plugin from your Prestashop shop modules. This step is necessary because our plugin now includes the Mailhook functionality by default.
+If you are an existing merchant using our Prestashop plugin, it is crucial that you uninstall the [Mailhook](https://github.com/wallee-payment/prestashop-mailhook) plugin from your Prestashop shop modules. This step is necessary because our plugin now includes the Mailhook functionality by default. 
+Also please disable all plugins that overrides default mail behavior. If you can't install/enable or uninstall the plugin, please rename or delete Mail.php from override folder if it exists there.
 
 ### 2. Download the Correct Plugin Archive
 
@@ -33,16 +34,16 @@ Your prompt attention to these instructions is greatly appreciated. If you have 
 
 ## Documentation
 
-* [Documentation](https://plugin-documentation.weareplanet.com/weareplanet/prestashop-1.7/1.2.39/docs/en/documentation.html)
+* [English](https://plugin-documentation.weareplanet.com/weareplanet/prestashop-1.7/1.2.40/docs/en/documentation.html)
 
 ## Support
 
-For support queries please contact [WeArePlanet support](mailto:support@datatrans.ch?subject=Support%20on%20Prestashop%201.7%20-%20Topic%3A).
+Support queries can be issued on the [WeArePlanet support site](https://paymentshub.weareplanet.com/space/select?target=/support).
 
 ## License
 
-Please see the [license file](https://github.com/weareplanet/prestashop-1.7/blob/1.2.39/LICENSE) for more information.
+Please see the [license file](https://github.com/weareplanet/prestashop-1.7/blob/1.2.40/LICENSE) for more information.
 
-## PrestaShop Version 8
+## Other PrestaShop Versions
 
-Find the module for PrestaShop version 8 [here](https://github.com/weareplanet/prestashop-8).
+Find the module for different PrestaShop versions [here](../../../prestashop).
