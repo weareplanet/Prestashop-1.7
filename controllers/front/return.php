@@ -99,8 +99,11 @@ class WeArePlanetReturnModuleFrontController extends ModuleFrontController
         }
         
         $order->setCurrentState(Configuration::get(WeArePlanetBasemodule::CK_STATUS_FAILED));
-        
-	// Set cart to cookie
+        //the new state should be saved here to override the stock issues of incrementing or decrementing items when going through the webhooks
+        //by calling the setCurrentState function more than once without saving. 
+        $order->save();
+
+        // Set cart to cookie
         $originalCartId = WeArePlanetHelper::getOrderMeta($order, 'originalCart');
         if (! empty($originalCartId)) {
             $this->context->cookie->id_cart = $originalCartId;
