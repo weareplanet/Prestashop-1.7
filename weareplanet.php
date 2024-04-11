@@ -32,7 +32,7 @@ class WeArePlanet extends PaymentModule
         $this->author = 'Customweb GmbH';
         $this->bootstrap = true;
         $this->need_instance = 0;
-        $this->version = '1.2.42';
+        $this->version = '1.2.43';
         $this->displayName = 'WeArePlanet';
         $this->description = $this->l('This PrestaShop module enables to process payments with %s.');
         $this->description = sprintf($this->description, 'WeArePlanet');

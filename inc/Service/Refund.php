@@ -111,7 +111,7 @@ class WeArePlanetServiceRefund extends WeArePlanetServiceAbstract
             $refundJob->setRefundParameters($parsedParameters);
             $refundJob->save();
             // validate Refund Job
-            // $this->createRefundObject($refundJob);
+            $this->createRefundObject($refundJob);
             $currentRefundJob = $refundJob->getId();
             WeArePlanetHelper::commitDBTransaction();
         } catch (Exception $e) {
