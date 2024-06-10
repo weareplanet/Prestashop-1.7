@@ -29,7 +29,7 @@ use \WeArePlanet\Sdk\ObjectSerializer;
  * @category    Class
  * @description 
  * @package     WeArePlanet\Sdk
- * @author      customweb GmbH
+ * @author      Planet Merchant Services Ltd.
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class PaymentMethodBrand implements ModelInterface, ArrayAccess
@@ -323,7 +323,7 @@ class PaymentMethodBrand implements ModelInterface, ArrayAccess
     /**
      * Sets image_path
      *
-     * @param string $image_path 
+     * @param string $image_path The path to the payment brand's image which is displayed to the customer.
      *
      * @return $this
      */
@@ -373,7 +373,7 @@ class PaymentMethodBrand implements ModelInterface, ArrayAccess
     /**
      * Sets payment_method
      *
-     * @param int $payment_method 
+     * @param int $payment_method The payment method that the brand belongs to.
      *
      * @return $this
      */
