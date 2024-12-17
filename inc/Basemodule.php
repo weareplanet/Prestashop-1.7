@@ -84,6 +84,12 @@ class WeArePlanetBasemodule
 
     const CK_RUN_LIMIT = 'PLN_RUN_LIMIT';
 
+    const CK_CHECKOUT_TYPE = 'PLN_CHECKOUT_TYPE';
+
+    const CK_CHECKOUT_TYPE_IFRAME = 'iframe';
+
+    const CK_CHECKOUT_TYPE_PAYMENT_PAGE = 'payment_page';
+
     private static $recordMailMessages = false;
 
     private static $recordedMailMessages = array();
@@ -155,7 +161,8 @@ class WeArePlanetBasemodule
             Configuration::updateGlobalValue(self::CK_CART_RECREATION, true) &&
             Configuration::updateGlobalValue(self::CK_INVOICE, true) &&
             Configuration::updateGlobalValue(self::CK_PACKING_SLIP, true) &&
-            Configuration::updateGlobalValue(self::CK_LINE_ITEM_CONSISTENCY, true);
+            Configuration::updateGlobalValue(self::CK_LINE_ITEM_CONSISTENCY, true) &&
+            Configuration::updateGlobalValue(self::CK_CHECKOUT_TYPE, self::CK_CHECKOUT_TYPE_PAYMENT_PAGE);
     }
 
     public static function uninstallConfigurationValues()
@@ -185,6 +192,7 @@ class WeArePlanetBasemodule
             Configuration::deleteByName(self::CK_STATUS_DECLINED) &&
             Configuration::deleteByName(self::CK_STATUS_FULFILL) &&
             Configuration::deleteByName(self::CK_RUN_LIMIT);
+            Configuration::deleteByName(self::CK_CHECKOUT_TYPE);
     }
 
 
@@ -298,6 +306,7 @@ class WeArePlanetBasemodule
             self::CK_STATUS_DECLINED,
             self::CK_STATUS_FULFILL,
             self::CK_RUN_LIMIT,
+            self::CK_CHECKOUT_TYPE,
         );
     }
 
@@ -450,7 +459,7 @@ class WeArePlanetBasemodule
     /**
      * Stores de configuration values set for the cron settings form.
      *
-     * @param Wallee $module
+     * @param WeArePlanet $module
      * @return string
      */
     public static function handleSaveCronSettings(WeArePlanet $module)
@@ -459,6 +468,29 @@ class WeArePlanetBasemodule
         if (Tools::isSubmit('submit' . $module->name . '_email')) {
             if (! $module->getContext()->shop->isFeatureActive() || $module->getContext()->shop->getContext() == Shop::CONTEXT_SHOP) {
                 Configuration::updateValue(self::CK_RUN_LIMIT, Tools::getValue(self::CK_RUN_LIMIT));
+                $output .= $module->displayConfirmation($module->l('Settings updated', 'basemodule'));
+            } else {
+                $output .= $module->displayError(
+                    $module->l('You can not store the configuration for all Shops or a Shop Group.', 'basemodule')
+                );
+            }
+        }
+        return $output;
+    }
+
+
+    /**
+     * Stores de configuration values set for the cron settings form.
+     *
+     * @param WeArePlanet $module
+     * @return string
+     */
+    public static function handleSaveCheckoutTypeSettings(WeArePlanet $module)
+    {
+        $output = "";
+        if (Tools::isSubmit('submit' . $module->name . '_checkout_type')) {
+            if (! $module->getContext()->shop->isFeatureActive() || $module->getContext()->shop->getContext() == Shop::CONTEXT_SHOP) {
+                Configuration::updateValue(self::CK_CHECKOUT_TYPE, Tools::getValue(self::CK_CHECKOUT_TYPE));
                 $output .= $module->displayConfirmation($module->l('Settings updated', 'basemodule'));
             } else {
                 $output .= $module->displayError(
@@ -1038,6 +1070,50 @@ class WeArePlanetBasemodule
         );
     }
 
+
+    public static function getCheckoutTypeForm(WeArePlanet $module)
+    {
+        return array(
+            'legend' => array(
+            'title' => $module->l('Checkout Type Settings', 'basemodule'),
+            ),
+            'input' => array(
+            array(
+                'type' => 'select',
+                'label' => $module->l('Checkout type', 'basemodule'),
+                'desc' => $module->l(
+                'Select the type of checkout process to be used.',
+                'basemodule'
+                ),
+                'name' => self::CK_CHECKOUT_TYPE,
+                'options' => array(
+                'query' => array(
+                    array(
+                    'id' => self::CK_CHECKOUT_TYPE_IFRAME,
+                    'name' => $module->l('Iframe', 'basemodule'),
+                    ),
+                    array(
+                    'id' => self::CK_CHECKOUT_TYPE_PAYMENT_PAGE,
+                    'name' => $module->l('Payment Page', 'basemodule'),
+                    ),
+                ),
+                'id' => 'id',
+                'name' => 'name',
+                ),
+            ),
+            ),
+            'buttons' => array(
+            array(
+                'title' => $module->l('Save', 'basemodule'),
+                'class' => 'pull-right',
+                'type' => 'submit',
+                'icon' => 'process-icon-save',
+                'name' => 'submit' . $module->name . '_checkout_type',
+            ),
+            ),
+        );
+    }
+
     public static function getDownloadConfigValues(WeArePlanet $module)
     {
         $values = array();
@@ -1242,7 +1318,7 @@ class WeArePlanetBasemodule
     /**
      * Gets a form with cron configuration settings.
      *
-     * @param Wallee $module
+     * @param WeArePlanet $module
      * @return mixed[]
      */
     public static function getCronSettingsForm(WeArePlanet $module)
@@ -1289,7 +1365,7 @@ class WeArePlanetBasemodule
     /**
      * Returns an array with the configuration values for the cron settings.
      *
-     * @param Wallee $module
+     * @param WeArePlanet $module
      * @return mixed[]
      */
     public static function getCronSettingsConfigValues(WeArePlanet $module)
@@ -1340,6 +1416,23 @@ class WeArePlanetBasemodule
             ) . ' ' . implode(" ", $errors);
         }
         return "";
+    }
+
+
+    /**
+     * Returns an array with the configuration values for the cron settings.
+     *
+     * @param WeArePlanet $module
+     * @return mixed[]
+     */
+    public static function getCheckoutTypeConfigValues(WeArePlanet $module)
+    {
+        $values = array();
+        if (! $module->getContext()->shop->isFeatureActive() || $module->getContext()->shop->getContext() == Shop::CONTEXT_SHOP) {
+            $values[self::CK_CHECKOUT_TYPE] = Configuration::get(self::CK_CHECKOUT_TYPE);
+        }
+
+        return $values;
     }
 
     private static function deleteCachedEntries()

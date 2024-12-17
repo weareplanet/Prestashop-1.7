@@ -10,6 +10,8 @@
 <form action="{$orderUrl|escape:'html'}" class="weareplanet-payment-form" data-method-id="{$methodId|escape:'html':'UTF-8'}">
 	<div id="weareplanet-{$methodId|escape:'html':'UTF-8'}">
 		<input type="hidden" id="weareplanet-iframe-possible-{$methodId|escape:'html':'UTF-8'}" name="weareplanet-iframe-possible-{$methodId|escape:'html':'UTF-8'}" value="false" />
-		<div id="weareplanet-loader-{$methodId|escape:'html':'UTF-8'}" class="weareplanet-loader"></div>
+		{if !$isPaymentPageCheckout}
+			<div id="weareplanet-loader-{$methodId|escape:'html':'UTF-8'}" class="weareplanet-loader"></div>
+		{/if}
 	</div>
 </form>

@@ -32,7 +32,7 @@ class WeArePlanet extends PaymentModule
         $this->author = 'Customweb GmbH';
         $this->bootstrap = true;
         $this->need_instance = 0;
-        $this->version = '1.2.48';
+        $this->version = '1.2.49';
         $this->displayName = 'WeArePlanet';
         $this->description = $this->l('This PrestaShop module enables to process payments with %s.');
         $this->description = sprintf($this->description, 'WeArePlanet');
@@ -150,6 +150,7 @@ class WeArePlanet extends PaymentModule
         $output .= WeArePlanetBasemodule::handleSaveSpaceViewId($this);
         $output .= WeArePlanetBasemodule::handleSaveOrderStatus($this);
         $output .= WeArePlanetBasemodule::handleSaveCronSettings($this);
+        $output .= WeArePlanetBasemodule::handleSaveCheckoutTypeSettings($this);
         $output .= WeArePlanetBasemodule::displayHelpButtons($this);
         return $output . WeArePlanetBasemodule::displayForm($this);
     }
@@ -161,6 +162,7 @@ class WeArePlanet extends PaymentModule
             WeArePlanetBasemodule::getCartRecreationForm($this),
             WeArePlanetBasemodule::getFeeForm($this),
             WeArePlanetBasemodule::getDocumentForm($this),
+            WeArePlanetBasemodule::getCheckoutTypeForm($this),
             WeArePlanetBasemodule::getSpaceViewIdForm($this),
             WeArePlanetBasemodule::getOrderStatusForm($this),
             WeArePlanetBasemodule::getCronSettingsForm($this),
@@ -177,7 +179,8 @@ class WeArePlanet extends PaymentModule
             WeArePlanetBasemodule::getDownloadConfigValues($this),
             WeArePlanetBasemodule::getSpaceViewIdConfigValues($this),
             WeArePlanetBasemodule::getOrderStatusConfigValues($this),
-            WeArePlanetBasemodule::getCronSettingsConfigValues($this)
+            WeArePlanetBasemodule::getCronSettingsConfigValues($this),
+            WeArePlanetBasemodule::getCheckoutTypeConfigValues($this)
         );
     }
 
@@ -257,6 +260,7 @@ class WeArePlanet extends PaymentModule
                 array(),
                 true
             );
+            $parameters['isPaymentPageCheckout'] = Configuration::get(WeArePlanetBasemodule::CK_CHECKOUT_TYPE) === WeArePlanetBasemodule::CK_CHECKOUT_TYPE_PAYMENT_PAGE;
             $this->context->smarty->assign($parameters);
             $paymentOption = new PrestaShop\PrestaShop\Core\Payment\PaymentOption();
             $paymentOption->setCallToActionText($parameters['name']);
@@ -318,6 +322,11 @@ class WeArePlanet extends PaymentModule
                     'weareplanetMsgJsonError' => $this->l(
                         'The server experienced an unexpected error, you may try again or try to use a different payment method.'
                     )
+                )
+            );
+            Media::addJsDef(
+                array(
+                'weareplanetIsPaymentPageCheckout' => Configuration::get(WeArePlanetBasemodule::CK_CHECKOUT_TYPE) === WeArePlanetBasemodule::CK_CHECKOUT_TYPE_PAYMENT_PAGE
                 )
             );
             if (isset($this->context->cart) && Validate::isLoadedObject($this->context->cart)) {

@@ -83,7 +83,8 @@ class WeArePlanetOrderModuleFrontController extends ModuleFrontController
             );
             $noIframeParamater = Tools::getValue('weareplanet-iframe-possible-' . $methodId, null);
             $noIframe = $noIframeParamater == 'false';
-            if ($noIframe) {
+            $checkoutType = Configuration::get(WeArePlanetBasemodule::CK_CHECKOUT_TYPE);
+            if ($noIframe || $checkoutType === WeArePlanetBasemodule::CK_CHECKOUT_TYPE_PAYMENT_PAGE) {
                 $url = WeArePlanetServiceTransaction::instance()->getPaymentPageUrl(
                     $GLOBALS['weareplanetTransactionIds']['spaceId'],
                     $GLOBALS['weareplanetTransactionIds']['transactionId']
