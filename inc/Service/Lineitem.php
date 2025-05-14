@@ -5,7 +5,7 @@
  * This Prestashop module enables to process payments with WeArePlanet (https://www.weareplanet.com/).
  *
  * @author customweb GmbH (http://www.customweb.com/)
- * @copyright 2017 - 2024 customweb GmbH
+ * @copyright 2017 - 2025 customweb GmbH
  * @license http://www.apache.org/licenses/LICENSE-2.0 Apache Software License (ASL 2.0)
  */
 
@@ -30,7 +30,7 @@ class WeArePlanetServiceLineitem extends WeArePlanetServiceAbstract
         $summary = $cart->getSummaryDetails(null, true);
         $taxAddress = new Address((int) $cart->{Configuration::get('PS_TAX_ADDRESS_TYPE')});
         $orderTotal = $cart->getOrderTotal(true, Cart::BOTH);
-        
+
         $configuration = WeArePlanetVersionadapter::getConfigurationInterface();
         $compute_precision = $configuration->get('_PS_PRICE_COMPUTE_PRECISION_');
 
@@ -47,6 +47,7 @@ class WeArePlanetServiceLineitem extends WeArePlanetServiceAbstract
                 'Product',
                 'lineitem'
             ) . ' ' . $productItem['id_product'] . '-' . $productItem['id_product_attribute'] : $productItem['name'];
+            $name = $this->trimStringByLength($name, 150);
             $item->setName($name);
             $item->setQuantity($productItem['quantity']);
             $item->setShippingRequired($productItem['is_virtual'] != '1');
@@ -129,6 +130,7 @@ class WeArePlanetServiceLineitem extends WeArePlanetServiceAbstract
                 $taxCalculatorFound = true;
             }
             $name = empty($name) ? WeArePlanetHelper::getModuleInstance()->l('Shipping', 'lineitem') : $name;
+            $name = $this->trimStringByLength($name, 150);
             $item->setName($name);
             if (! $taxCalculatorFound) {
                 $taxRate = 0;
@@ -157,7 +159,9 @@ class WeArePlanetServiceLineitem extends WeArePlanetServiceAbstract
         if ($wrappingCosts > 0) {
             $item = new \WeArePlanet\Sdk\Model\LineItemCreate();
             $item->setAmountIncludingTax($this->roundAmount($wrappingCosts, $currencyCode));
-            $item->setName(WeArePlanetHelper::getModuleInstance()->l('Wrapping Fee', 'lineitem'));
+            $name = WeArePlanetHelper::getModuleInstance()->l('Wrapping Fee', 'lineitem');
+            $name = $this->trimStringByLength($name, 150);
+            $item->setName($name);
             $item->setQuantity(1);
             $item->setShippingRequired(false);
             $item->setSku('wrapping');
@@ -210,9 +214,9 @@ class WeArePlanetServiceLineitem extends WeArePlanetServiceAbstract
                     'Discount',
                     'lineitem'
                 ) : $discount['description'];
-                
+
                 $discountIncludingTax = Tools::ps_round($discount['value_real'], $compute_precision);
-                
+
                 $discountItems = $this->getDiscountItems(
                     $nameBase,
                     'discount-' . $discount['id_cart_rule'],
@@ -242,6 +246,7 @@ class WeArePlanetServiceLineitem extends WeArePlanetServiceAbstract
                 'Shipping Discount',
                 'lineitem'
             ) : $discountOnly['name'];
+            $name = $this->trimStringByLength($name, 150);
             $itemFreeShipping->setName($name);
             $itemFreeShipping->setQuantity(1);
             $itemFreeShipping->setShippingRequired(false);
@@ -264,7 +269,7 @@ class WeArePlanetServiceLineitem extends WeArePlanetServiceAbstract
     private function extractTaxName($psTax, $cart)
     {
         $translated = $psTax->name[$cart->id_lang];
-        
+
         if (empty($translated) || strlen($translated) < 2) {
             foreach ($psTax->name as $name) {
                 if (!empty($name) && strlen($name) >= 2) {
@@ -276,7 +281,7 @@ class WeArePlanetServiceLineitem extends WeArePlanetServiceAbstract
             return $translated;
         }
     }
-    
+
     private function isFreeShippingDiscountOnlyCart($discounts)
     {
         $shippingOnly = false;
@@ -310,9 +315,9 @@ class WeArePlanetServiceLineitem extends WeArePlanetServiceAbstract
         foreach ($orders as $order) {
             $orderTotal += (float) $order->total_paid;
         }
-        
+
         $items = $this->getItemsFromOrdersInner($orders, $orderTotal);
-        
+
         $cleaned = WeArePlanetHelper::cleanupLineItems(
             $items,
             $orderTotal,
@@ -363,6 +368,7 @@ class WeArePlanetServiceLineitem extends WeArePlanetServiceAbstract
                     'Product',
                     'lineitem'
                 ) . ' ' . $orderItem['product_id'] . '-' . $orderItem['product_attribute_id'] : $orderItem['product_name'];
+                $name = $this->trimStringByLength($name, 150);
                 $item->setName($name);
                 $item->setQuantity($orderItem['product_quantity']);
                 $item->setShippingRequired($orderItem['is_virtual'] != '1');
@@ -453,6 +459,7 @@ class WeArePlanetServiceLineitem extends WeArePlanetServiceAbstract
                     }
                 }
                 $name = empty($name) ? WeArePlanetHelper::getModuleInstance()->l('Shipping', 'lineitem') : $name;
+                $name = $this->trimStringByLength($name, 150);
                 $item->setName($name);
                 $item->setType(\WeArePlanet\Sdk\Model\LineItemType::SHIPPING);
                 $item->setUniqueId($uniqueId);
@@ -468,7 +475,9 @@ class WeArePlanetServiceLineitem extends WeArePlanetServiceAbstract
 
                 $item = new \WeArePlanet\Sdk\Model\LineItemCreate();
                 $item->setAmountIncludingTax($this->roundAmount($wrappingCosts, $currencyCode));
-                $item->setName(WeArePlanetHelper::getModuleInstance()->l('Wrapping Fee', 'lineitem'));
+                $name = WeArePlanetHelper::getModuleInstance()->l('Wrapping Fee', 'lineitem');
+                $name = $this->trimStringByLength($name, 150);
+                $item->setName($name);
                 $item->setQuantity(1);
                 $item->setSku('wrapping');
                 $wrappingTaxCalculator = null;
@@ -537,6 +546,7 @@ class WeArePlanetServiceLineitem extends WeArePlanetServiceAbstract
                     'Shipping Discount',
                     'lineitem'
                 ) : $discountOnly['name'];
+                $name = $this->trimStringByLength($name, 150);
                 $itemFreeShipping->setName($name);
                 $itemFreeShipping->setQuantity(1);
                 $itemFreeShipping->setShippingRequired(false);
@@ -571,7 +581,7 @@ class WeArePlanetServiceLineitem extends WeArePlanetServiceAbstract
         }
         return $shippingOnly;
     }
-    
+
     /**
      * This method adjusts the rounding according to the difference of the total amount.
      *
@@ -589,25 +599,25 @@ class WeArePlanetServiceLineitem extends WeArePlanetServiceAbstract
     private function roundDiscount($discountAmount, $differnceToTotalAmount)
     {
         $roundingError = round(abs($differnceToTotalAmount - $discountAmount), 2);
-        
+
         if ($roundingError == 0) {
             return $discountAmount;
         }
-        
+
         if (Tools::$round_mode == null) {
             $round_mode = (int)Configuration::get('PS_PRICE_ROUND_MODE');
         } else {
             $round_mode = Tools::$round_mode;
         }
-        
+
         if ($roundingError > 0.01 && $roundingError <= 0.05 && defined('PS_ROUND_CHF_5CTS') && $round_mode == PS_ROUND_CHF_5CTS) {
             return $differnceToTotalAmount;
         } else {
             $configuration = WeArePlanetVersionadapter::getConfigurationInterface();
             $compute_precision = $configuration->get('_PS_PRICE_COMPUTE_PRECISION_');
-            
+
             $allowedRoundingDifference = 1 / pow(10, $compute_precision);
-            
+
             if ($roundingError <= $allowedRoundingDifference) {
                 return $differnceToTotalAmount;
             } else {
@@ -615,7 +625,7 @@ class WeArePlanetServiceLineitem extends WeArePlanetServiceAbstract
             }
         }
     }
-    
+
 
     private function getDiscountItems(
         $nameBase,
@@ -649,6 +659,7 @@ class WeArePlanetServiceLineitem extends WeArePlanetServiceAbstract
                         - 1;
                     $item = new \WeArePlanet\Sdk\Model\LineItemCreate();
                     $item->setAmountIncludingTax($freeGiftDiscount);
+                    $nameBase = $this->trimStringByLength($nameBase, 150);
                     $item->setName($nameBase);
                     $item->setQuantity(1);
                     $item->setShippingRequired(false);
@@ -665,7 +676,7 @@ class WeArePlanetServiceLineitem extends WeArePlanetServiceAbstract
         foreach ($existingLineItems as $exisitingLineItem) {
             $lineItemTotal += $exisitingLineItem->getAmountIncludingTax();
         }
-        
+
         $discountTotal = $this->roundDiscount($discountWithTax, $lineItemTotal - $orderTotal) * - 1;
         $remainingDiscount = $this->roundAmount($discountTotal - $freeGiftDiscount, $currencyCode);
 
@@ -676,6 +687,7 @@ class WeArePlanetServiceLineitem extends WeArePlanetServiceAbstract
                 // Find attribute
                 $item = new \WeArePlanet\Sdk\Model\LineItemCreate();
                 $item->setAmountIncludingTax($remainingDiscount);
+                $nameBase = $this->trimStringByLength($nameBase, 150);
                 $item->setName($nameBase);
                 $item->setQuantity(1);
                 $item->setShippingRequired(false);
@@ -695,6 +707,7 @@ class WeArePlanetServiceLineitem extends WeArePlanetServiceAbstract
                 // Use Tax of cheapest item
                 $item = new \WeArePlanet\Sdk\Model\LineItemCreate();
                 $item->setAmountIncludingTax($remainingDiscount);
+                $nameBase = $this->trimStringByLength($nameBase, 150);
                 $item->setName($nameBase);
                 $item->setQuantity(1);
                 $item->setShippingRequired(false);
@@ -738,6 +751,7 @@ class WeArePlanetServiceLineitem extends WeArePlanetServiceAbstract
                     $item = new \WeArePlanet\Sdk\Model\LineItemCreate();
                     $totalDiscountComputed += $totalAmount;
                     $item->setAmountIncludingTax($totalAmount);
+                    $nameBase = $this->trimStringByLength($nameBase, 150);
                     $item->setName($nameBase);
                     $item->setQuantity(1);
                     $item->setShippingRequired(false);
@@ -751,6 +765,7 @@ class WeArePlanetServiceLineitem extends WeArePlanetServiceAbstract
                     // we have no taxes
                     $item = new \WeArePlanet\Sdk\Model\LineItemCreate();
                     $item->setAmountIncludingTax($remainingDiscount);
+                    $nameBase = $this->trimStringByLength($nameBase, 150);
                     $item->setName($nameBase);
                     $item->setQuantity(1);
                     $item->setShippingRequired(false);
@@ -786,6 +801,7 @@ class WeArePlanetServiceLineitem extends WeArePlanetServiceAbstract
                 // Find attribute
                 $item = new \WeArePlanet\Sdk\Model\LineItemCreate();
                 $item->setAmountIncludingTax($remainingDiscount);
+                $nameBase = $this->trimStringByLength($nameBase, 150);
                 $item->setName($nameBase);
                 $item->setQuantity(1);
                 $item->setShippingRequired(false);
@@ -821,6 +837,7 @@ class WeArePlanetServiceLineitem extends WeArePlanetServiceAbstract
                     $item = new \WeArePlanet\Sdk\Model\LineItemCreate();
                     $totalDiscountComputed += $totalAmount;
                     $item->setAmountIncludingTax($totalAmount);
+                    $nameBase = $this->trimStringByLength($nameBase, 150);
                     $item->setName($nameBase);
                     $item->setQuantity(1);
                     $item->setShippingRequired(false);
@@ -834,6 +851,7 @@ class WeArePlanetServiceLineitem extends WeArePlanetServiceAbstract
                     // we have no taxes
                     $item = new \WeArePlanet\Sdk\Model\LineItemCreate();
                     $item->setAmountIncludingTax($remainingDiscount);
+                    $nameBase = $this->trimStringByLength($nameBase, 150);
                     $item->setName($nameBase);
                     $item->setQuantity(1);
                     $item->setShippingRequired(false);
@@ -879,5 +897,15 @@ class WeArePlanetServiceLineitem extends WeArePlanetServiceAbstract
         $lineItem->setSku($this->fixLength($lineItem->getSku(), 200));
         $lineItem->setName($this->fixLength($lineItem->getName(), 150));
         return $lineItem;
+    }
+
+    /**
+     * @param string $string
+     * @param int $lentgh
+     * @return string
+     */
+    protected function trimStringByLength(string $string, int $lentgh): string
+    {
+        return $this->fixLength($string, $lentgh);
     }
 }

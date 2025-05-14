@@ -6,7 +6,7 @@
  * This Prestashop module enables to process payments with WeArePlanet (https://www.weareplanet.com/).
  *
  * @author customweb GmbH (http://www.customweb.com/)
- * @copyright 2017 - 2024 customweb GmbH
+ * @copyright 2017 - 2025 customweb GmbH
  * @license http://www.apache.org/licenses/LICENSE-2.0 Apache Software License (ASL 2.0)
  */
 
@@ -32,7 +32,7 @@ class WeArePlanet extends PaymentModule
         $this->author = 'Customweb GmbH';
         $this->bootstrap = true;
         $this->need_instance = 0;
-        $this->version = '1.2.49';
+        $this->version = '1.2.50';
         $this->displayName = 'WeArePlanet';
         $this->description = $this->l('This PrestaShop module enables to process payments with %s.');
         $this->description = sprintf($this->description, 'WeArePlanet');
