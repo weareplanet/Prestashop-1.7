@@ -5,7 +5,7 @@
  * This Prestashop module enables to process payments with WeArePlanet (https://www.weareplanet.com/).
  *
  * @author customweb GmbH (http://www.customweb.com/)
- * @copyright 2017 - 2025 customweb GmbH
+ * @copyright 2017 - 2026 customweb GmbH
  * @license http://www.apache.org/licenses/LICENSE-2.0 Apache Software License (ASL 2.0)
  */
 
@@ -26,6 +26,17 @@ class WeArePlanetServiceMethodconfiguration extends WeArePlanetServiceAbstract
             $configuration->getLinkedSpaceId(),
             $configuration->getId()
         );
+        if (empty($entities)) {
+            // The configuration exists in the portal but not locally. This happens when it was
+            // added or activated in the portal without a state transition webhook reaching the
+            // shop. Synchronize to create the missing local entry.
+            try {
+                $this->synchronize();
+            } catch (Exception $e) {
+                PrestaShopLogger::addLog($e->getMessage(), 2, null, 'WeArePlanet');
+            }
+            return;
+        }
         foreach ($entities as $entity) {
             if ($this->hasChanged($configuration, $entity)) {
                 $entity->setConfigurationName($configuration->getName());
